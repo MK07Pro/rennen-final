@@ -8,10 +8,10 @@
 </head>
 <body>
 
-    <div id="startModal" class="modal-overlay">
-        <div class="modal-content">
+    <div id="startScreenModal" class="modal-overlay-container">
+        <div class="modal-content-box">
             <h2>📜 Das Große Derby - Regelwerk</h2>
-            <div class="modal-body">
+            <div class="modal-body-text">
                 <p>Willkommen auf der Rennbahn! Deine Aufgabe:</p>
                 <ul>
                     <li>🏇 <strong>Hämmern:</strong> Drücke deine Taste so schnell du kannst!</li>
@@ -23,123 +23,123 @@
                 </ul>
                 <hr>
                 
-                <div class="modal-settings">
+                <div class="modal-settings-group">
                     <label>Schwierigkeit:</label>
-                    <select id="modalDifficulty">
+                    <select id="difficultySelectionDropdown">
                         <option value="easy">Leicht 🟢</option>
                         <option value="medium" selected>Mittel 🟡</option>
                         <option value="hard">Schwer 🔴</option>
                     </select>
                 </div>
-                <div class="modal-settings">
+                <div class="modal-settings-group">
                     <label>Modus:</label>
                     <div style="display:inline-block; text-align:left;">
-                        <input type="checkbox" id="modalTournament">
-                        <label for="modalTournament">🏆 Turnier-Modus (3 Runden)</label>
+                        <input type="checkbox" id="tournamentModeCheckbox">
+                        <label for="tournamentModeCheckbox">🏆 Turnier-Modus (3 Runden)</label>
                     </div>
                 </div>
-                <button id="closeModalBtn">VERSTANDEN & LOS GEHT'S</button>
+                <button id="closeModalButton">VERSTANDEN & LOS GEHT'S</button>
             </div>
         </div>
     </div>
 
-    <div id="shopModal" class="modal-overlay hidden">
-        <div class="modal-content" style="max-width: 800px;">
+    <div id="shopInterfaceModal" class="modal-overlay-container visually-hidden">
+        <div class="modal-content-box" style="max-width: 800px;">
             <h2>🛒 Der Rennstall-Shop</h2>
             <p>Kaufe dir legendäre Reittiere!</p>
-            <div id="shopContainer" class="shop-grid">
+            <div id="shopItemsContainer" class="shop-grid-layout">
                 </div>
-            <button id="closeShopBtn" style="margin-top: 20px; background: #7f8c8d; font-size: 30px; padding: 20px 40px;">ZURÜCK ZUR BAHN</button>
+            <button id="closeShopButton" style="margin-top: 20px; background: #7f8c8d; font-size: 30px; padding: 20px 40px;">ZURÜCK ZUR BAHN</button>
         </div>
     </div>
 
-    <div id="dopingModal" class="modal-overlay hidden">
-        <div class="modal-content doping-content">
+    <div id="dopingOfferModal" class="modal-overlay-container visually-hidden">
+        <div class="modal-content-box doping-content-style">
             <div style="font-size: 50px;">🕵️‍♂️</div>
             <h2>Psst... Hey du!</h2>
-            <div class="modal-body">
+            <div class="modal-body-text">
                 <p>Das ist die finale Runde. Die anderen sind verdammt schnell.</p>
                 <p>Ich hab hier ein <strong>spezielles Mittelchen</strong>. Macht dein Pferd 30% schneller.</p>
                 <p style="color: #c0392b; font-weight: bold;">(Warnung: Wenn du kurz vor dem Ziel erwischt wirst, verlierst du alles!)</p>
             </div>
             
             <div style="display: flex; gap: 20px; justify-content: center; margin-top: 20px;">
-                <button id="acceptDopingBtn" style="background: #e74c3c; font-size: 24px">🧪 Gib mir das Zeug (-500$)</button>
-                <button id="declineDopingBtn" style="background: #27ae60; font-size: 24px">⛔ Nein, ich gewinne fair!</button>
+                <button id="acceptDopingButton" style="background: #e74c3c; font-size: 24px">🧪 Gib mir das Zeug (-500$)</button>
+                <button id="declineDopingButton" style="background: #27ae60; font-size: 24px">⛔ Nein, ich gewinne fair!</button>
             </div>
         </div>
     </div>
 
-    <div id="bustedOverlay" class="modal-overlay hidden" style="background: rgba(192, 57, 43, 0.95); z-index: 2000;">
-        <div class="modal-content busted-content" style="border-color: red; transform: rotate(2deg);">
+    <div id="bustedNotificationOverlay" class="modal-overlay-container visually-hidden" style="background: rgba(192, 57, 43, 0.95); z-index: 2000;">
+        <div class="modal-content-box busted-content-style" style="border-color: red; transform: rotate(2deg);">
             <div style="font-size: 120px;">🚨</div>
             <h1 style="color: red; font-size: 4em; margin: 0; text-shadow: 2px 2px black;">ERWISCHT!</h1>
             <h2 style="border: none;">DISQUALIFIZIERT</h2>
             <p style="color: #333; font-weight: bold;">Doping-Test positiv! Dein Preisgeld und Guthaben wurden beschlagnahmt.</p>
-            <button id="bustedConfirmBtn" style="background: #333; color: white;">Verdammt...</button>
+            <button id="confirmBustedButton" style="background: #333; color: white;">Verdammt...</button>
         </div>
     </div>
 
-    <div class="sky-background"></div>
+    <div class="sky-background-layer"></div>
 
-    <div class="container">
+    <div class="main-game-container">
         <h1>🏇 Großes Derby 🏇</h1>
         
-        <div id="setup">
-            <div class="setup-row">
-                <div class="setup-group">
+        <div id="gameSetupSection">
+            <div class="setup-row-wrapper">
+                <div class="setup-group-item">
                     <label>Aktueller Modus:</label>
-                    <span id="currentModeDisplay" style="font-weight:bold; color:#2c3e50;">Mittel (Einzelrennen)</span>
+                    <span id="currentGameModeDisplay" style="font-weight:bold; color:#2c3e50;">Mittel (Einzelrennen)</span>
                 </div>
 
-                <div class="setup-group">
+                <div class="setup-group-item">
                     <label>Spieler-Anzahl:</label>
-                    <input type="checkbox" id="multiplayerToggle">
-                    <label for="multiplayerToggle">2 Spieler</label>
+                    <input type="checkbox" id="multiplayerModeCheckbox">
+                    <label for="multiplayerModeCheckbox">2 Spieler</label>
                 </div>
             </div>
 
             <hr>
 
-            <div class="keys-container">
-                <div class="key-group">
-                    Spieler 1 Taste: <input type="text" id="keyInput1" maxlength="1" placeholder="_" readonly class="key-box">
+            <div class="keyboard-config-container">
+                <div class="key-config-group">
+                    Spieler 1 Taste: <input type="text" id="playerOneKeyInput" maxlength="1" placeholder="_" readonly class="key-input-box">
                 </div>
-                <div class="key-group" id="p2-setup" style="display: none;">
-                    Spieler 2 Taste: <input type="text" id="keyInput2" maxlength="1" placeholder="_" readonly class="key-box">
+                <div class="key-config-group" id="playerTwoSetupContainer" style="display: none;">
+                    Spieler 2 Taste: <input type="text" id="playerTwoKeyInput" maxlength="1" placeholder="_" readonly class="key-input-box">
                 </div>
             </div>
 
             <div style="display: flex; gap: 10px; justify-content: center;">
-                <button id="shopBtn" style="width: auto; padding: 15px 20px; background: #f39c12; border-color: #d35400;">🛒 SHOP</button>
-                <button id="startBtn" disabled>RENNEN STARTEN</button>
+                <button id="openShopButton" style="width: auto; padding: 15px 20px; background: #f39c12; border-color: #d35400;">🛒 SHOP</button>
+                <button id="startGameButton" disabled>RENNEN STARTEN</button>
             </div>
         </div>
 
-        <h2 id="statusText">Konfiguriere das Spiel...</h2>
+        <h2 id="gameStatusTextDisplay">Konfiguriere das Spiel...</h2>
 
-        <div class="race-track">
+        <div class="race-track-display">
             
-            <img src="pferd-gelb.png" class="horse" id="horse-p1" alt="Spieler 1">
+            <img src="pferd-gelb.png" class="horse-figure" id="playerOneHorseImage" alt="Spieler 1">
 
-            <img src="pferd-gruen.png" class="horse" id="horse-lane2" alt="Grünes Pferd">
-            <img src="pferd-blau.png" class="horse" id="horse-ai2" alt="Blaues Pferd">
-            <img src="pferd-rot.png" class="horse" id="horse-ai3" alt="Rotes Pferd">
+            <img src="pferd-gruen.png" class="horse-figure" id="playerTwoHorseImage" alt="Grünes Pferd">
+            <img src="pferd-blau.png" class="horse-figure" id="computerOpponentImageOne" alt="Blaues Pferd">
+            <img src="pferd-rot.png" class="horse-figure" id="computerOpponentImageTwo" alt="Rotes Pferd">
 
         </div> 
 
-        <div class="hud-dashboard">
-            <div class="hud-box betting-box">
+        <div class="heads-up-display-dashboard">
+            <div class="hud-info-box betting-section">
                 <h3>💰 WETT-BÜRO</h3>
-                <div class="balance-display">Guthaben: <span id="moneyDisplay">1000</span> $</div>
-                <div class="bet-controls">
-                    Einsatz: <input type="number" id="betInput" value="100" min="0" step="50"> $
+                <div class="balance-text-display">Guthaben: <span id="currentBalanceDisplay">1000</span> $</div>
+                <div class="betting-controls-wrapper">
+                    Einsatz: <input type="number" id="bettingAmountInput" value="100" min="0" step="50"> $
                 </div>
             </div>
 
-            <div class="hud-box score-box">
+            <div class="hud-info-box scoreboard-section">
                 <h3>🏆 ERGEBNISSE</h3>
-                <ul id="scoreList"><li>Noch keine Rennen...</li></ul>
+                <ul id="scoreboardList"><li>Noch keine Rennen...</li></ul>
             </div>
         </div>
     </div>
@@ -147,7 +147,3 @@
     <script src="game.js"></script>
 </body>
 </html>
-
-
-
-
