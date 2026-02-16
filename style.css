@@ -19,8 +19,8 @@ body {
 .sky-background-layer { display: none; }
 body::after { display: none; }
 
-/* --- HAUPT CONTAINER FÜR DAS SPIEL --- */
-.main-game-container {
+/* --- HAUPT CONTAINER --- */
+.main-container {
     background-color: #fffcf5;
     background-image: linear-gradient(#eee 1px, transparent 1px);
     background-size: 100% 25px;
@@ -43,8 +43,8 @@ h1 {
     font-size: 3em;
 }
 
-/* --- SETUP BEREICH (Einstellungen oben) --- */
-#gameSetupSection {
+/* --- SETUP BEREICH --- */
+#setupContainer {
     background: #e8e0d0;
     padding: 20px;
     border: 2px dashed #5d4037;
@@ -52,12 +52,12 @@ h1 {
     margin-bottom: 25px;
 }
 
-.setup-row-wrapper {
+.setup-row {
     display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; margin-bottom: 10px;
     font-weight: bold;
 }
 
-.keyboard-config-container {
+.key-setup-area {
     display: flex; justify-content: center; gap: 30px; margin: 15px 0;
 }
 
@@ -72,7 +72,7 @@ h1 {
     color: #3e2723;
 }
 
-/* --- BUTTONS ALLGEMEIN (Start & Shop) --- */
+/* --- BUTTONS ALLGEMEIN --- */
 #startGameButton, #openShopButton {
     padding: 15px 40px;
     font-size: 24px;
@@ -92,7 +92,7 @@ h1 {
 #startGameButton:active, #openShopButton:active { transform: translate(4px, 4px); box-shadow: 2px 2px 0px #145a32; }
 #startGameButton:disabled { background-color: #bdc3c7; border-color: #7f8c8d; box-shadow: none; cursor: not-allowed; }
 
-#gameStatusTextDisplay {
+#gameStatusText {
     font-family: 'Impact', sans-serif;
     font-size: 32px; color: #e74c3c; min-height: 40px;
     margin-bottom: 15px; font-weight: normal;
@@ -100,7 +100,7 @@ h1 {
     letter-spacing: 1px;
 }
 
-/* --- MODAL (OVERLAYS) --- */
+/* --- MODAL (POPUP) --- */
 .modal-overlay-container {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0, 0, 0, 0.8);
@@ -124,10 +124,10 @@ h1 {
     color: #3e2723;
     position: relative;
     transform: rotate(-1deg);
-    animation: dropInAnimation 0.5s ease-out;
+    animation: dropIn 0.5s ease-out;
 }
 
-@keyframes dropInAnimation {
+@keyframes dropIn {
     from { transform: translateY(-50px) rotate(0deg); opacity: 0; }
     to { transform: translateY(0) rotate(-1deg); opacity: 1; }
 }
@@ -149,7 +149,7 @@ select {
     font-family: inherit; font-weight: bold; color: #3e2723; padding: 5px; cursor: pointer;
 }
 
-/* Generisches Styling für Shop/Doping Buttons */
+/* Generisches Styling für Buttons */
 button {
     font-family: 'Impact', sans-serif;
     cursor: pointer;
@@ -157,10 +157,10 @@ button {
     box-shadow: 4px 4px 0 #333;
 }
 button:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #333; }
-.visually-hidden { display: none !important; }
+.hidden-element { display: none !important; }
 
 
-/* --- BUTTON IM POPUP --- */
+/* --- POPUP SCHLIESSEN BUTTON --- */
 #closeModalButton {
     background-color: #8b4513;
     background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.1) 10px, rgba(0,0,0,0.1) 20px);
@@ -193,7 +193,7 @@ button:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #333; }
     overflow-y: auto;
 }
 
-.shop-merchandise-card {
+.shop-product-card {
     background: white;
     border: 2px solid #3e2723;
     padding: 10px;
@@ -201,23 +201,23 @@ button:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #333; }
     transition: transform 0.1s;
     position: relative;
 }
-.shop-merchandise-card:hover { transform: scale(1.03); }
-.shop-merchandise-card img { width: 100%; height: 100px; object-fit: contain; }
-.shop-merchandise-card h4 { margin: 5px 0; font-size: 16px; }
-.shop-merchandise-card .price-tag { color: #27ae60; font-weight: bold; }
+.shop-product-card:hover { transform: scale(1.03); }
+.shop-product-card img { width: 100%; height: 100px; object-fit: contain; }
+.shop-product-card h4 { margin: 5px 0; font-size: 16px; }
+.shop-product-card .price-label { color: #27ae60; font-weight: bold; }
 
 /* Wenn Item gekauft ist */
-.shop-merchandise-card.status-owned { background-color: #dcedc8; border-color: #2ecc71; }
-.shop-merchandise-card.status-owned .price-tag { display: none; }
-.shop-merchandise-card.status-owned::after { content: "BESITZ"; background: #2ecc71; color: white; padding: 2px 8px; font-size: 12px; position: absolute; top: 5px; right: 5px; }
+.shop-product-card.status-owned { background-color: #dcedc8; border-color: #2ecc71; }
+.shop-product-card.status-owned .price-label { display: none; }
+.shop-product-card.status-owned::after { content: "BESITZ"; background: #2ecc71; color: white; padding: 2px 8px; font-size: 12px; position: absolute; top: 5px; right: 5px; }
 
 /* Wenn Item ausgerüstet ist */
-.shop-merchandise-card.status-equipped { border: 4px solid #f1c40f; box-shadow: 0 0 10px #f1c40f; }
-.shop-merchandise-card.status-equipped::after { content: "AKTIV"; background: #f1c40f; color: black; }
+.shop-product-card.status-equipped { border: 4px solid #f1c40f; box-shadow: 0 0 10px #f1c40f; }
+.shop-product-card.status-equipped::after { content: "AKTIV"; background: #f1c40f; color: black; }
 
 
 /* --- RENNBAHN ANPASSUNG --- */
-.race-track-display {
+.race-track-area {
     position: relative;
     width: 100%;
     background-image: url('background.png');
@@ -232,7 +232,7 @@ button:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #333; }
     overflow: hidden;
 }
 
-.horse-figure {
+.race-horse-image {
     position: absolute; 
     height: auto; 
     transform-origin: bottom center;
@@ -240,14 +240,14 @@ button:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #333; }
     filter: drop-shadow(3px 5px 2px rgba(0,0,0,0.3));
 }
 
-#computerOpponentImageTwo { width: 26%; top: 41%; left: -5%; z-index: 1; }
-#computerOpponentImageOne { width: 26%; top: 51%; left: -5%; z-index: 2; }
-#playerTwoHorseImage { width: 26%; top: 61%; left: -5%; z-index: 3; }
-#playerOneHorseImage { width: 26%; top: 71%; left: -5%; z-index: 4; }
+#horseComputerThree { width: 26%; top: 41%; left: -5%; z-index: 1; }
+#horseComputerTwo { width: 26%; top: 51%; left: -5%; z-index: 2; }
+#horsePlayerTwo { width: 26%; top: 61%; left: -5%; z-index: 3; }
+#horsePlayerOne { width: 26%; top: 71%; left: -5%; z-index: 4; }
 
 
-/* --- HEADS UP DISPLAY (HUD) --- */
-.heads-up-display-dashboard {
+/* --- DASHBOARD --- */
+.dashboard-area {
     display: flex; justify-content: space-between;
     padding: 20px;
     background: transparent;
@@ -255,7 +255,7 @@ button:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #333; }
     margin-top: 10px;
 }
 
-.hud-info-box {
+.dashboard-box {
     background-color: #263238;
     color: #ecf0f1;
     padding: 15px;
@@ -267,7 +267,7 @@ button:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #333; }
     font-family: 'Courier New', monospace;
 }
 
-.hud-info-box h3 {
+.dashboard-box h3 {
     margin: 0 0 15px 0;
     color: #f1c40f;
     border-bottom: 2px dashed #78909c;
@@ -276,34 +276,34 @@ button:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #333; }
     text-transform: uppercase;
 }
 
-.balance-text-display {
+.money-text {
     font-size: 22px; margin-bottom: 15px;
     font-weight: bold; color: #2ecc71;
     text-shadow: 0 0 5px rgba(46, 204, 113, 0.5);
 }
 
-.betting-controls-wrapper { font-weight: bold; }
-.betting-controls-wrapper input {
+.bet-controls { font-weight: bold; }
+.bet-controls input {
     width: 80px; padding: 5px; font-size: 18px;
     background: #cfd8dc; border: 2px solid #000;
     font-family: 'Courier New', monospace; font-weight: bold;
 }
 
-#scoreboardList {
+#resultsList {
     list-style: none; padding: 0; margin: 0;
     max-height: 100px; overflow-y: auto;
     font-size: 14px;
     border-top: 1px solid #444;
 }
 
-#scoreboardList li {
+#resultsList li {
     padding: 5px 0; border-bottom: 1px solid #444;
     letter-spacing: 1px;
 }
 
-#scoreboardList::-webkit-scrollbar { width: 8px; }
-#scoreboardList::-webkit-scrollbar-track { background: #37474f; }
-#scoreboardList::-webkit-scrollbar-thumb { background: #78909c; border-radius: 4px; }
+#resultsList::-webkit-scrollbar { width: 8px; }
+#resultsList::-webkit-scrollbar-track { background: #37474f; }
+#resultsList::-webkit-scrollbar-thumb { background: #78909c; border-radius: 4px; }
 
-.victory-text-message { color: #2ecc71; font-weight: bold; text-shadow: 0 0 2px #000; }
-.defeat-text-message { color: #e74c3c; text-shadow: 0 0 2px #000; }
+.win-text-style { color: #2ecc71; font-weight: bold; text-shadow: 0 0 2px #000; }
+.loss-text-style { color: #e74c3c; text-shadow: 0 0 2px #000; }
