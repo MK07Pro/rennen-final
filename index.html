@@ -25,7 +25,7 @@
                 
                 <div class="modal-settings-group">
                     <label>Schwierigkeit:</label>
-                    <select id="difficultySelectionDropdown">
+                    <select id="difficultySelect">
                         <option value="easy">Leicht 🟢</option>
                         <option value="medium" selected>Mittel 🟡</option>
                         <option value="hard">Schwer 🔴</option>
@@ -34,8 +34,8 @@
                 <div class="modal-settings-group">
                     <label>Modus:</label>
                     <div style="display:inline-block; text-align:left;">
-                        <input type="checkbox" id="tournamentModeCheckbox">
-                        <label for="tournamentModeCheckbox">🏆 Turnier-Modus (3 Runden)</label>
+                        <input type="checkbox" id="tournamentCheckbox">
+                        <label for="tournamentCheckbox">🏆 Turnier-Modus (3 Runden)</label>
                     </div>
                 </div>
                 <button id="closeModalButton">VERSTANDEN & LOS GEHT'S</button>
@@ -43,7 +43,7 @@
         </div>
     </div>
 
-    <div id="shopInterfaceModal" class="modal-overlay-container visually-hidden">
+    <div id="shopModal" class="modal-overlay-container hidden-element">
         <div class="modal-content-box" style="max-width: 800px;">
             <h2>🛒 Der Rennstall-Shop</h2>
             <p>Kaufe dir legendäre Reittiere!</p>
@@ -53,8 +53,8 @@
         </div>
     </div>
 
-    <div id="dopingOfferModal" class="modal-overlay-container visually-hidden">
-        <div class="modal-content-box doping-content-style">
+    <div id="dopingModal" class="modal-overlay-container hidden-element">
+        <div class="modal-content-box doping-style">
             <div style="font-size: 50px;">🕵️‍♂️</div>
             <h2>Psst... Hey du!</h2>
             <div class="modal-body-text">
@@ -70,8 +70,8 @@
         </div>
     </div>
 
-    <div id="bustedNotificationOverlay" class="modal-overlay-container visually-hidden" style="background: rgba(192, 57, 43, 0.95); z-index: 2000;">
-        <div class="modal-content-box busted-content-style" style="border-color: red; transform: rotate(2deg);">
+    <div id="bustedOverlay" class="modal-overlay-container hidden-element" style="background: rgba(192, 57, 43, 0.95); z-index: 2000;">
+        <div class="modal-content-box busted-style" style="border-color: red; transform: rotate(2deg);">
             <div style="font-size: 120px;">🚨</div>
             <h1 style="color: red; font-size: 4em; margin: 0; text-shadow: 2px 2px black;">ERWISCHT!</h1>
             <h2 style="border: none;">DISQUALIFIZIERT</h2>
@@ -82,30 +82,30 @@
 
     <div class="sky-background-layer"></div>
 
-    <div class="main-game-container">
+    <div class="main-container">
         <h1>🏇 Großes Derby 🏇</h1>
         
-        <div id="gameSetupSection">
-            <div class="setup-row-wrapper">
-                <div class="setup-group-item">
+        <div id="setupContainer">
+            <div class="setup-row">
+                <div class="setup-group">
                     <label>Aktueller Modus:</label>
-                    <span id="currentGameModeDisplay" style="font-weight:bold; color:#2c3e50;">Mittel (Einzelrennen)</span>
+                    <span id="gameModeDisplay" style="font-weight:bold; color:#2c3e50;">Mittel (Einzelrennen)</span>
                 </div>
 
-                <div class="setup-group-item">
+                <div class="setup-group">
                     <label>Spieler-Anzahl:</label>
-                    <input type="checkbox" id="multiplayerModeCheckbox">
-                    <label for="multiplayerModeCheckbox">2 Spieler</label>
+                    <input type="checkbox" id="twoPlayerModeCheckbox">
+                    <label for="twoPlayerModeCheckbox">2 Spieler</label>
                 </div>
             </div>
 
             <hr>
 
-            <div class="keyboard-config-container">
-                <div class="key-config-group">
+            <div class="key-setup-area">
+                <div class="key-group">
                     Spieler 1 Taste: <input type="text" id="playerOneKeyInput" maxlength="1" placeholder="_" readonly class="key-input-box">
                 </div>
-                <div class="key-config-group" id="playerTwoSetupContainer" style="display: none;">
+                <div class="key-group" id="playerTwoSetupContainer" style="display: none;">
                     Spieler 2 Taste: <input type="text" id="playerTwoKeyInput" maxlength="1" placeholder="_" readonly class="key-input-box">
                 </div>
             </div>
@@ -116,30 +116,30 @@
             </div>
         </div>
 
-        <h2 id="gameStatusTextDisplay">Konfiguriere das Spiel...</h2>
+        <h2 id="gameStatusText">Konfiguriere das Spiel...</h2>
 
-        <div class="race-track-display">
+        <div class="race-track-area">
             
-            <img src="pferd-gelb.png" class="horse-figure" id="playerOneHorseImage" alt="Spieler 1">
+            <img src="pferd-gelb.png" class="race-horse-image" id="horsePlayerOne" alt="Spieler 1">
 
-            <img src="pferd-gruen.png" class="horse-figure" id="playerTwoHorseImage" alt="Grünes Pferd">
-            <img src="pferd-blau.png" class="horse-figure" id="computerOpponentImageOne" alt="Blaues Pferd">
-            <img src="pferd-rot.png" class="horse-figure" id="computerOpponentImageTwo" alt="Rotes Pferd">
+            <img src="pferd-gruen.png" class="race-horse-image" id="horsePlayerTwo" alt="Grünes Pferd">
+            <img src="pferd-blau.png" class="race-horse-image" id="horseComputerTwo" alt="Blaues Pferd">
+            <img src="pferd-rot.png" class="race-horse-image" id="horseComputerThree" alt="Rotes Pferd">
 
         </div> 
 
-        <div class="heads-up-display-dashboard">
-            <div class="hud-info-box betting-section">
+        <div class="dashboard-area">
+            <div class="dashboard-box betting-box">
                 <h3>💰 WETT-BÜRO</h3>
-                <div class="balance-text-display">Guthaben: <span id="currentBalanceDisplay">1000</span> $</div>
-                <div class="betting-controls-wrapper">
-                    Einsatz: <input type="number" id="bettingAmountInput" value="100" min="0" step="50"> $
+                <div class="money-text">Guthaben: <span id="playerMoneyDisplay">1000</span> $</div>
+                <div class="bet-controls">
+                    Einsatz: <input type="number" id="bettingInput" value="100" min="0" step="50"> $
                 </div>
             </div>
 
-            <div class="hud-info-box scoreboard-section">
+            <div class="dashboard-box results-box">
                 <h3>🏆 ERGEBNISSE</h3>
-                <ul id="scoreboardList"><li>Noch keine Rennen...</li></ul>
+                <ul id="resultsList"><li>Noch keine Rennen...</li></ul>
             </div>
         </div>
     </div>
